@@ -1,16 +1,17 @@
-import React, { createContext, useReducer } from 'react'
-import { EditList } from './EditList'
+import React, { createContext, useReducer, useState } from "react";
+import { EditList } from "./EditList";
 
-export const ListContext = createContext()
+export const ListContext = createContext();
 
 const Context = ({ children }) => {
-    const [listReducer, dispatch] = useReducer(EditList, []
-    )
+  const [listReducer, dispatch] = useReducer(EditList, []);
+  const [filter, setFilter] = useState("all")
 
-    return (
-        <ListContext.Provider value={{ listReducer, dispatch }} > {children} </ListContext.Provider>
-    )
-}
+  return (
+    <ListContext.Provider value={{ listReducer, dispatch, filter, setFilter }}>
+      {children}
+    </ListContext.Provider>
+  );
+};
 
-export default Context
-
+export default Context;
