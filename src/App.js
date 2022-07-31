@@ -1,16 +1,24 @@
 
 import './App.css';
-import { Form } from './components/Form';
-import TodoList from './components/TodoList';
+import TodoApp from './TodoApp';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+import Pomodoro from './components/pomodoro/Pomodoro';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header>
-        <h1>topic</h1>
-      </header>
-      <Form />
-      <TodoList />
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<TodoApp />} exact />
+          <Route path='/pomodoro' element={<Pomodoro />} exact />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

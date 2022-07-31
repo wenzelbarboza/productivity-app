@@ -30,5 +30,12 @@ export const EditList = (state, action) => {
     }
 };
 
+export const EditTimer = (state, action) => {
+    switch (action.type) {
+        default:
+            return state
+    }
+}
+
 // state.filter((item) => item.id === action.id ? item.complete = !item.complete : true)
 // 
