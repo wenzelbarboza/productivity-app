@@ -5,7 +5,6 @@ import { FaTrash } from "react-icons/fa";
 
 const Todo = ({ task, id, complete, dispatch }) => {
 
-    console.log(complete)
 
     const handleComplete = () => {
         dispatch({

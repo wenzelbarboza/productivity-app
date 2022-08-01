@@ -32,6 +32,38 @@ export const EditList = (state, action) => {
 
 export const EditTimer = (state, action) => {
     switch (action.type) {
+        case "START_TIMER":
+            return {
+                ...state,
+                timerValue: action.timerValue
+            }
+        case "START_STOP":
+            return {
+                ...state,
+                start: action.start
+            }
+        case "SESSION_INCREMENT":
+            return {
+                ...state,
+                sessionValue: action.sessionValue,
+                timerValue: action.timerValue
+            }
+        case "SESSION_DECREMENT":
+            return {
+                ...state,
+                sessionValue: action.sessionValue,
+                timerValue: action.timerValue
+            }
+        case "BREAK_INCREMENT":
+            return {
+                ...state,
+                breakValue: action.breakValue,
+            }
+        case "BREAK_DECREMENT":
+            return {
+                ...state,
+                breakValue: action.breakValue,
+            }
         default:
             return state
     }

@@ -12,15 +12,16 @@ const Context = ({ children }) => {
   // timer
   const TimerInitial = {
     title: "pomodoro",
+    start: false,
     sessionValue: 25,
-    BreakValue: 5,
-    timeValue: 1500
+    breakValue: 5,
+    timerValue: 1500
   }
 
-  const [timerRecucer, timerdispatch] = useReducer(EditTimer, TimerInitial)
+  const [timerReducer, timerDispatch] = useReducer(EditTimer, TimerInitial)
 
   return (
-    <ListContext.Provider value={{ listReducer, dispatch, filter, setFilter, timerRecucer, timerdispatch }}>
+    <ListContext.Provider value={{ listReducer, dispatch, filter, setFilter, timerReducer, timerDispatch }}>
       {children}
     </ListContext.Provider>
   );
