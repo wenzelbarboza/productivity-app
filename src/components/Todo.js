@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { BsFillCheckSquareFill } from "react-icons/bs";
 import { FaTrash } from "react-icons/fa";
-
+import { IoIosTimer } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const Todo = ({ task, id, complete, dispatch }) => {
 
@@ -29,6 +30,9 @@ const Todo = ({ task, id, complete, dispatch }) => {
             </button>
             <button onClick={handleDelete} className="trash-btn">
                 <FaTrash />
+            </button>
+            <button className="trash-btn">
+                <Link to='/Pomodoro' state={{ id: id }}><IoIosTimer /></Link>
             </button>
         </div>
     );

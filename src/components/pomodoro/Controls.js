@@ -3,9 +3,13 @@ import { ListContext } from '../../context/Context'
 
 
 
-const Controls = () => {
+const Controls = ({ id }) => {
 
-    const { timerReducer: { timerValue, start, sessionValue, breakValue }, timerDispatch } = useContext(ListContext)
+    const { listReducer, timerReducer: { timerValue, start, sessionValue, breakValue }, timerDispatch } = useContext(ListContext)
+
+
+    const task = listReducer.filter(item => item.id === id)
+    console.log(task)
 
     const startHandler = () => {
         timerDispatch({

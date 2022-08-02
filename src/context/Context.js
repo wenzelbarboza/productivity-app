@@ -1,12 +1,24 @@
 import React, { createContext, useReducer, useState } from "react";
-
+import { faker } from "@faker-js/faker";
 import { EditList, EditTimer } from "./EditList";
 
 export const ListContext = createContext();
 
 const Context = ({ children }) => {
   // todolist
-  const [listReducer, dispatch] = useReducer(EditList, []);
+  const [listReducer, dispatch] = useReducer(EditList, [{
+    task: "pomodoro",
+    id: faker.datatype.uuid(),
+    justTimer: true,
+    complete: false,
+    timerTitle: "pomodoro",
+    timerNumOfPomodoro: 1,
+    timerStart: false,
+    timerSessionValue: 25,
+    timerBreakValue: 5,
+    timerTimerValue: 1500
+
+  }]);
   const [filter, setFilter] = useState("all")
 
   // timer

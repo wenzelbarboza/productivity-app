@@ -4,31 +4,29 @@ import Todo from "./Todo";
 
 const TodoList = () => {
     const { listReducer, dispatch, filter } = useContext(ListContext);
-    const [filteredList, setFilteredList] = useState([]);
-
-    useEffect(() => {
-        renderFilter();
-    }, [filter, listReducer])
+    let filteredList = listReducer.filter(item => item.justTimer === false)
 
 
     const renderFilter = () => {
+
         switch (filter) {
             case "completed":
-                setFilteredList(listReducer.filter(item => item.complete == true))
+                filteredList = filteredList.filter(item => item.complete == true)
                 break
             case "uncompleted":
-                setFilteredList(listReducer.filter(item => item.complete === false))
+                filteredList = filteredList.filter(item => item.complete === false)
                 break
             default:
-                setFilteredList(listReducer)
+                filteredList = filteredList
 
         }
+        return filteredList
     }
 
     return (
         <div className="todo-container">
             <ul className="todo-list">
-                {filteredList.map((item) => (
+                {renderFilter().map((item) => (
                     <Todo
                         key={item.id}
                         id={item.id}
