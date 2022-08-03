@@ -1,8 +1,5 @@
-import React, { useContext } from 'react'
-import { ListContext } from '../../context/Context';
 
-const useTimer = () => {
-    const { timerReducer: { timerValue } } = useContext(ListContext)
+const useTimer = (timerValue) => {
 
     let minutes = Math.floor(timerValue / 60);
     let seconds = timerValue - (minutes * 60);

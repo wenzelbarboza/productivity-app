@@ -11,6 +11,7 @@ export const EditList = (state, action) => {
                     justTimer: false,
                     complete: false,
                     timerTitle: action.payload.task,
+                    timerTimerLabel: "session",
                     timerNumOfPomodoro: action.payload.count,
                     timerStart: false,
                     timerSessionValue: 25,
@@ -38,18 +39,27 @@ export const EditList = (state, action) => {
                 if (item.id === action.payload.id) {
                     return {
                         ...item,
-                        timerValue: action.payload.timerTimerValue
+                        timerTimerValue: action.payload.timerTimerValue
                     }
                 }
                 return item
             })
-
+        case "TOGGLE_LABEL":
+            return state.map(item => {
+                if (item.id === action.payload.id) {
+                    return {
+                        ...item,
+                        timerTimerLabel: action.payload.timerTimerLabel
+                    }
+                }
+                return item
+            })
         case "START_STOP":
             return state.map(item => {
                 if (item.id === action.payload.id) {
                     return {
                         ...item,
-                        start: action.payload.timerStart
+                        timerStart: action.payload.timerStart
                     }
                 }
                 return item
@@ -92,6 +102,20 @@ export const EditList = (state, action) => {
                     return {
                         ...item,
                         timerBreakValue: action.payload.timerBreakValue
+                    }
+                }
+                return item
+            })
+
+        case "RESET":
+            return state.map(item => {
+                if (item.id === action.payload.id) {
+                    return {
+                        ...item,
+                        timerStart: false,
+                        timerSessionValue: 25,
+                        timerBreakValue: 5,
+                        timerTimerValue: 1500
                     }
                 }
                 return item

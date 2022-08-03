@@ -12,6 +12,7 @@ const Context = ({ children }) => {
     justTimer: true,
     complete: false,
     timerTitle: "pomodoro",
+    timerTimerLabel: "session",
     timerNumOfPomodoro: 1,
     timerStart: false,
     timerSessionValue: 25,

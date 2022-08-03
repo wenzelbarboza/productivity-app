@@ -14,9 +14,16 @@ header {
 }
 
 .container{
-  background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+  /* background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%); */
+  background-image: linear-gradient(120deg, #111111 0%, #3d3d3d 100%);
   min-height: 100vh;
   color: white;
+}
+
+.form-container{
+  display:flex;
+  height: 100px;
+  justify-content: space-between;
 }
 
 header,

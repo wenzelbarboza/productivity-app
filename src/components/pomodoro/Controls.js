@@ -5,31 +5,94 @@ import { ListContext } from '../../context/Context'
 
 const Controls = ({ id }) => {
 
-    const { listReducer, timerReducer: { timerValue, start, sessionValue, breakValue }, timerDispatch } = useContext(ListContext)
+    const { listReducer, dispatch } = useContext(ListContext)
+
+    // , timerReducer: { timerValue, start, sessionValue, breakValue }, timerDispatch 
 
 
-    const task = listReducer.filter(item => item.id === id)
-    console.log(task)
+    const list = listReducer.filter(item => item.id === id)
+    const { timerNumOfPomodoro,
+        timerStart,
+        timerSessionValue,
+        timerBreakValue,
+        timerTimerValue,
+        timerTimerLabel } = list[0]
 
     const startHandler = () => {
-        timerDispatch({
+        dispatch({
             type: "START_STOP",
-            start: !start
+            payload: {
+                id: id,
+                timerStart: !timerStart
+            }
+        })
+    }
+
+    const resetHandler = () => {
+        dispatch({
+            type: "RESET",
+            payload: {
+                id: id
+            }
         })
     }
 
     // hadle counting time
     const handleCount = () => {
-        timerDispatch({
+        dispatch({
             type: "START_TIMER",
-            timerValue: timerValue - 1
+            payload: {
+                id: id,
+                timerTimerValue: timerTimerValue - 1
+            }
         })
+        // if (timerTimerValue === 0) audioSoundRef.current.play();
+        if (timerTimerValue <= 0) {
+            if (timerTimerLabel === 'session') {
+                dispatch({
+                    type: "TOGGLE_LABLE",
+                    payload: {
+                        id: id,
+                        timerTimerLabel: 'break'
+                    }
+                })
+
+                dispatch({
+
+                    type: "START_TIMER",
+                    payload: {
+                        id: id,
+                        timerTimerValue: (timerBreakValue * 60) - 1,
+                    }
+
+                })
+            } else {
+                dispatch({
+
+                    type: "TOGGLE_LABEL",
+                    payload: {
+                        id: id,
+                        timerTimerLabel: 'session'
+                    }
+
+                })
+                dispatch({
+
+                    type: "START_TIMER",
+                    payload: {
+                        timerTimerValue: (timerSessionValue * 60) - 1,
+                        id: id
+                    }
+                })
+            }
+        }
 
     }
-    console.log(timerValue)
+    console.log(timerTimerValue)
 
+    // to run the clock
     useEffect(() => {
-        if (start) {
+        if (timerStart) {
             let timerInterval = setInterval(() => {
                 handleCount();
 
@@ -41,63 +104,83 @@ const Controls = ({ id }) => {
 
     //handel increment of session
     const sessionIncrementHandler = () => {
-        timerDispatch({
+        if (timerSessionValue >= 60) return
+        dispatch({
             type: "SESSION_INCREMENT",
-            sessionValue: sessionValue + 1,
-            timerValue: (sessionValue + 1) * 60
+            payload: {
+                id: id,
+                timerSessionValue: timerSessionValue + 1,
+                timerTimerValue: (timerSessionValue + 1) * 60
+            }
         })
     }
 
     // handel decrement of session
     const sessionDecrementHandler = () => {
-        timerDispatch({
+        if (timerSessionValue <= 1) return
+        dispatch({
             type: "SESSION_DECREMENT",
-            sessionValue: sessionValue - 1,
-            timerValue: (sessionValue - 1) * 60
+            payload: {
+                id: id,
+                timerSessionValue: timerSessionValue - 1,
+                timerTimerValue: (timerSessionValue - 1) * 60
+            }
         })
 
     }
 
     //handel increment of break
     const breakIncrementHandler = () => {
-        timerDispatch({
+        if (timerSessionValue >= 60) return
+        dispatch({
             type: "BREAK_INCREMENT",
-            breakValue: breakValue + 1
+            payload: {
+                id: id,
+                timerBreakValue: timerBreakValue + 1
+            }
         })
-        console.log(breakValue)
+        console.log(timerBreakValue)
     }
 
     // handel decrement of break
     const breakDecrementHandler = () => {
-        timerDispatch({
+        if (timerSessionValue <= 1) return
+        dispatch({
             type: "BREAK_DECREMENT",
-            breakValue: breakValue - 1
+            payload: {
+                id: id,
+                timerBreakValue: timerBreakValue - 1
+            }
         })
-        console.log(breakValue)
+        console.log(timerBreakValue)
     }
 
 
     return (
         <div className='diaplay-controls'>
             <div className='controls'>
-                <div style={{ cursor: "pointer" }} onClick={startHandler}>{start ? <h3>stop</h3> : <h3>start</h3>}  </div>
+                <div style={{ cursor: "pointer" }} onClick={startHandler}>{timerStart ? <h3>stop</h3> : <h3>start</h3>}  </div>
+                <div style={{ cursor: "pointer" }} onClick={resetHandler}>Reset</div>
             </div>
+
+
             <div className='increment-decrement'>
                 <div className='increment'>
                     <h5>session</h5>
                     <div>
-                        <div onClick={sessionIncrementHandler}>+</div>
-                        <div onClick={sessionDecrementHandler}>-</div>
+                        <div style={{ cursor: "pointer" }} onClick={sessionIncrementHandler}>+</div>
+                        <div style={{ cursor: "pointer" }} onClick={sessionDecrementHandler}>-</div>
                     </div>
                 </div>
                 <div className='decrement'>
                     <h5>break</h5>
                     <div>
-                        <div onClick={breakIncrementHandler}>+</div>
-                        <div onClick={breakDecrementHandler}>-</div>
+                        <div style={{ cursor: "pointer" }} onClick={breakIncrementHandler}>+</div>
+                        <div style={{ cursor: "pointer" }} onClick={breakDecrementHandler}>-</div>
                     </div>
                 </div>
             </div>
+
         </div>
     )
 }

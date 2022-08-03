@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { Form } from './components/Form';
 import TodoList from './components/TodoList';
 import { Link } from 'react-router-dom'
+import { ListContext } from './context/Context';
 
 const TodoApp = () => {
+
+    const { listReducer } = useContext(ListContext)
+
+
+    const defaultPomodoro = listReducer.filter(item => item.justTimer)
+    console.log("TodoApp=", defaultPomodoro[0])
+
+
     return (
         <div className="container">
             <div className="App">
@@ -12,7 +21,7 @@ const TodoApp = () => {
                 </header>
                 <Form />
                 <TodoList />
-                <Link to='/pomodoro'>Pomodoro</Link>
+                <Link to='/pomodoro' state={{ id: defaultPomodoro[0].id }} >Pomodoro</Link>
             </div>
         </div>
 

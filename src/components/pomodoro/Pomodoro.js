@@ -8,11 +8,11 @@ import { ListContext } from '../../context/Context'
 const Pomodoro = () => {
 
     const location = useLocation()
-
+    console.log("id is=", location.state.id)
     return (
         <div className='pomodoro-container'>
             <div className='pomodoro-display-container'>
-                <Timer />
+                <Timer id={location.state.id} />
                 <Controls id={location.state.id} />
             </div>
         </div>

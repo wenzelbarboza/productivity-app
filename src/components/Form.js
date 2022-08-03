@@ -48,20 +48,21 @@ export const Form = () => {
 
   return (
     <form>
-      <input
-        type="text"
-        value={ThisTask.task}
-        onChange={handelTask}
-        className="todo-input"
-      />
-      <div className="timer-btn">
-        <IoIosTimer />
+      <div className="form-container">
+        <input
+          type="text"
+          value={ThisTask.task}
+          onChange={handelTask}
+          className="todo-input"
+        />
+        <div className="timer-btn">
+          <IoIosTimer />
+        </div>
+        <input type="number" value={ThisTask.count} className="todo-input-number" onChange={countHandler} />
+        <button className="todo-button" onClick={submitHandler} type="submit">
+          <AiOutlinePlusSquare fontSize="20px" />
+        </button>
       </div>
-
-      <input type="number" value={ThisTask.count} className="todo-input-number" onChange={countHandler} />
-      <button className="todo-button" onClick={submitHandler} type="submit">
-        <AiOutlinePlusSquare fontSize="20px" />
-      </button>
       <div className="select">
         <select onChange={filterHandler} name="todos" className="filter-todo">
           <option value="all">All</option>
