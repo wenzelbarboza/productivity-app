@@ -14,8 +14,8 @@ const Timer = ({ id }) => {
 
     return (
         <div className='display-time'>
-            <div className="timer-heading">hedding</div>
-            <div className='time'><h1>{timerClock}</h1></div>
+            <div className="timer-heading">{filtered[0].task}</div>
+            <div className='time'><h1 className='heading'>{timerClock}</h1></div>
         </div>
     )
 }

@@ -107,6 +107,17 @@ export const EditList = (state, action) => {
                 return item
             })
 
+        case "DECREASE_POMO":
+            return state.map(item => {
+                if (item.id === action.payload.id) {
+                    return {
+                        ...item,
+                        timerNumOfPomodoro: action.payload.timerNumOfPomodoro
+                    }
+                }
+                return item
+            })
+
         case "RESET":
             return state.map(item => {
                 if (item.id === action.payload.id) {

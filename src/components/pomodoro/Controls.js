@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { ListContext } from '../../context/Context'
-
+import { Navigate } from "react-router-dom";
 
 
 const Controls = ({ id }) => {
@@ -49,6 +49,27 @@ const Controls = ({ id }) => {
         // if (timerTimerValue === 0) audioSoundRef.current.play();
         if (timerTimerValue <= 0) {
             if (timerTimerLabel === 'session') {
+
+                if (timerNumOfPomodoro > 1) {
+                    console.log("id inside if=", id)
+                    dispatch({
+                        type: "DECREASE_POMO",
+                        payload: {
+                            id: id,
+                            timerNumOfPomodoro: timerNumOfPomodoro - 1
+                        }
+                    })
+                }
+                else {
+                    dispatch({
+                        type: "DECREASE_POMO",
+                        payload: {
+                            id: id,
+                            timerNumOfPomodoro: timerNumOfPomodoro - 1
+                        }
+                    })
+                }
+
                 dispatch({
                     type: "TOGGLE_LABLE",
                     payload: {
@@ -158,11 +179,13 @@ const Controls = ({ id }) => {
 
     return (
         <div className='diaplay-controls'>
+            {/* {!timerNumOfPomodoro && <Navigate to='/' />} */}
             <div className='controls'>
                 <div style={{ cursor: "pointer" }} onClick={startHandler}>{timerStart ? <h3>stop</h3> : <h3>start</h3>}  </div>
                 <div style={{ cursor: "pointer" }} onClick={resetHandler}>Reset</div>
             </div>
 
+            <div className="pomodoro-count">{timerNumOfPomodoro}</div>
 
             <div className='increment-decrement'>
                 <div className='increment'>
