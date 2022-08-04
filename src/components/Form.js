@@ -19,7 +19,7 @@ export const Form = () => {
   };
   //set number of pomodoros
   const countHandler = (e) => {
-    if (e.target.value < 1) return
+    if (e.target.value < 0) return
     setThisTask(prev => ({
       ...prev,
       count: e.target.value
@@ -28,11 +28,13 @@ export const Form = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    let pomoCount;
+    ThisTask.count > 1 ? pomoCount = ThisTask.count : pomoCount = 1;
     dispatch({
       type: "ADD_ITEM",
       payload: {
         task: ThisTask.task,
-        count: ThisTask.count
+        count: pomoCount
       },
     });
     // reset the task after submit
@@ -49,26 +51,34 @@ export const Form = () => {
   return (
     <form>
       <div className="form-container">
-        <input
-          type="text"
-          value={ThisTask.task}
-          onChange={handelTask}
-          className="todo-input"
-        />
-        <div className="timer-btn">
-          <IoIosTimer />
+        <div className="form-divider-1">
+          <div className="form-divider-1-1">
+            <input
+              type="text"
+              value={ThisTask.task}
+              onChange={handelTask}
+              className="todo-input"
+            />
+            <div className="timer-btn">
+              <IoIosTimer className="timer-icon" />
+            </div>
+            <input type="number" value={ThisTask.count} className="todo-input-number" onChange={countHandler} />
+            <button className="todo-button" onClick={submitHandler} type="submit">
+              <AiOutlinePlusSquare fontSize="20px" />
+            </button>
+          </div>
         </div>
-        <input type="number" value={ThisTask.count} className="todo-input-number" onChange={countHandler} />
-        <button className="todo-button" onClick={submitHandler} type="submit">
-          <AiOutlinePlusSquare fontSize="20px" />
-        </button>
-      </div>
-      <div className="select">
-        <select onChange={filterHandler} name="todos" className="filter-todo">
-          <option value="all">All</option>
-          <option value="completed">Completed</option>
-          <option value="uncompleted">Uncompleted</option>
-        </select>
+        <div className="form-divider-2">
+          <div className="form-divider-2-2">
+            <div className="select">
+              <select onChange={filterHandler} name="todos" className="filter-todo">
+                <option value="all">All</option>
+                <option value="completed">Completed</option>
+                <option value="uncompleted">Uncompleted</option>
+              </select>
+            </div>
+          </div>
+        </div>
       </div>
     </form>
   );

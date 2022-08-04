@@ -62,6 +62,10 @@ const Controls = ({ id }) => {
                 }
                 else {
                     dispatch({
+                        type: "COMPLETE",
+                        id: id
+                    })
+                    dispatch({
                         type: "DECREASE_POMO",
                         payload: {
                             id: id,
@@ -179,7 +183,7 @@ const Controls = ({ id }) => {
 
     return (
         <div className='diaplay-controls'>
-            {/* {!timerNumOfPomodoro && <Navigate to='/' />} */}
+            {!timerNumOfPomodoro && <Navigate to='/' />}
             <div className='controls'>
                 <div style={{ cursor: "pointer" }} onClick={startHandler}>{timerStart ? <h3>stop</h3> : <h3>start</h3>}  </div>
                 <div style={{ cursor: "pointer" }} onClick={resetHandler}>Reset</div>
