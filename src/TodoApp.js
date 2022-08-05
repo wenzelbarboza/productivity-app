@@ -3,6 +3,8 @@ import { Form } from './components/Form';
 import TodoList from './components/TodoList';
 import { Link } from 'react-router-dom'
 import { ListContext } from './context/Context';
+import { IoIosTimer } from "react-icons/io";
+
 
 const TodoApp = () => {
 
@@ -21,7 +23,10 @@ const TodoApp = () => {
                 </header>
                 <Form />
                 <TodoList />
-                <Link to='/pomodoro' state={{ id: defaultPomodoro[0].id }} >Pomodoro</Link>
+
+                <Link to='/pomodoro' state={{ id: defaultPomodoro[0].id }} >
+                    <IoIosTimer className='timer-bottom' />
+                </Link>
             </div>
         </div>
 

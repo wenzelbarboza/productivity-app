@@ -16,7 +16,8 @@ const Controls = ({ id }) => {
         timerSessionValue,
         timerBreakValue,
         timerTimerValue,
-        timerTimerLabel } = list[0]
+        timerTimerLabel,
+        justTimer } = list[0]
 
     const startHandler = () => {
         dispatch({
@@ -50,7 +51,7 @@ const Controls = ({ id }) => {
         if (timerTimerValue <= 0) {
             if (timerTimerLabel === 'session') {
 
-                if (timerNumOfPomodoro > 1) {
+                if (timerNumOfPomodoro > 1 && !justTimer) {
                     console.log("id inside if=", id)
                     dispatch({
                         type: "DECREASE_POMO",
@@ -60,7 +61,7 @@ const Controls = ({ id }) => {
                         }
                     })
                 }
-                else {
+                else if (timerNumOfPomodoro <= 1 && !justTimer) {
                     dispatch({
                         type: "COMPLETE",
                         id: id
@@ -189,7 +190,7 @@ const Controls = ({ id }) => {
                 <div style={{ cursor: "pointer" }} onClick={resetHandler}>Reset</div>
             </div>
 
-            <div className="pomodoro-count">{timerNumOfPomodoro}</div>
+            {!justTimer && <div className="pomodoro-count">{timerNumOfPomodoro}</div>}
 
             <div className='increment-decrement'>
                 <div className='increment'>

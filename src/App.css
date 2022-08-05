@@ -6,7 +6,7 @@
 body {
   background-image: linear-gradient(120deg, #111111 0%, #3d3d3d 100%);
   font-family: "Poppins", sans-serif;
-
+  overflow-x: hidden;
 }
 header {
   font-size: 2rem;
@@ -24,6 +24,7 @@ header {
   color: white;
   display: flex;
   flex-basis:100%;
+  position:relative
   /* flex-direction: column; */
 
 } 
@@ -152,6 +153,8 @@ form button:hover {
   /* margin-left: 10px; */
 }
 
+
+
 .timer-icon{
   height: 100%;
 
@@ -238,6 +241,27 @@ select {
   overflow-x: scroll;
 }
 
+.timer-bottom{
+  font-size: 75px;
+  position: fixed;
+  bottom: 0px;
+  left: 0; 
+  right: 0; 
+  margin-left: auto; 
+  margin-right: auto; 
+  width: 100px;
+  background-color: #ff6f47;
+  color: #ffffff;
+  border-radius: 10px;
+}
+
+.timer-btn-todo{
+  color: #ffffff;
+}
+
+.timer-trash-btn{
+  background-color: #ba3a31;
+}
 
 /* Transition */
 /*
@@ -258,7 +282,6 @@ form input{
   .form-container{
     width:95vw;
   }
-
 
 }
 
@@ -286,7 +309,7 @@ form input{
     margin: 0;
   }
   form input,
-form button {
+  form button {
   padding: 8px;
   font-size: 1.7rem;
 }
@@ -316,10 +339,16 @@ form input{
 .todo-item{
   width: 40vw;
   overflow:scroll;
+  overflow-y: hidden;
 }
 
 .complete-btn, .trash-btn{
   width: 13vw;
+}
+
+.timer-bottom{
+  font-size: 65px;
+  width: 65px;
 }
 
 }

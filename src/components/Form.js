@@ -30,6 +30,7 @@ export const Form = () => {
     e.preventDefault();
     let pomoCount;
     ThisTask.count > 1 ? pomoCount = ThisTask.count : pomoCount = 1;
+    if (ThisTask.task === '') return
     dispatch({
       type: "ADD_ITEM",
       payload: {
