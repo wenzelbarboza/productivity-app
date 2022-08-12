@@ -31,9 +31,12 @@ const Todo = ({ task, id, complete, dispatch }) => {
             <button onClick={handleDelete} className="trash-btn">
                 <FaTrash />
             </button>
-            <button className="trash-btn timer-trash-btn">
-                <Link to='/Pomodoro' state={{ id: id }}><IoIosTimer className="timer-btn-todo" /></Link>
-            </button>
+            <Link to='/Pomodoro' state={{ id: id }}>
+                <button className="trash-btn timer-trash-btn">
+                    <IoIosTimer className="timer-btn-todo" />
+                </button>
+            </Link>
+
         </div>
     );
 };
